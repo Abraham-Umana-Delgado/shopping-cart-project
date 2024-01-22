@@ -1,17 +1,26 @@
 {
-	"name": "tienda",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"sass": "sass --watch --style=compressed sass/index.scss public/bundle.css",
-		"build": "rollup --watch --config"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"devDependencies": {
-		"rollup": "^2.75.7"
-	}
+  "type": "module",
+  "name": "tienda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup --watch --config",
+    "sass": "sass --watch --style=compressed sass/index.scss public/bundle.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "rollup": "^2.79.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abraham-Umana-Delgado/shopping-cart-project.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Abraham-Umana-Delgado/shopping-cart-project/issues"
+  },
+  "homepage": "https://github.com/Abraham-Umana-Delgado/shopping-cart-project#readme"
 }

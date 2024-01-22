@@ -1,66 +1,4 @@
-'use strict';
-
-const product$1 = document.getElementById('producto');
-const mainProductImage = product$1.querySelector('.producto__imagen');
-const thumbsContainer = product$1.querySelector('.producto__thumbs');
-const colorProduct = product$1.querySelector('#propiedad-color');
-const inputProductAmount = product$1.querySelector('#cantidad');
-const btnIncreaseProductAmount = product$1.querySelector('#incrementar-cantidad');
-const btnDecreaseProductAmount = product$1.querySelector('#disminuir-cantidad');
-
-thumbsContainer.addEventListener('click', (event) => {
-    if (event.target.tagName === 'IMG') {
-        const imageSrc = event.target.src;
-        const lastIndex = imageSrc.lastIndexOf('/');
-        const thumbnailName = imageSrc.substring(lastIndex + 1);
-
-        mainProductImage.src = `./img/tennis/${thumbnailName}`;
-    }
-});
-
-colorProduct.addEventListener('click', (event) => {
-    if (event.target.tagName === 'INPUT') {
-        mainProductImage.src = `./img/tennis/${event.target.value}.jpg`;
-    }
-});
-
-btnIncreaseProductAmount.addEventListener('click', (event) => {
-    inputProductAmount.value = parseInt(inputProductAmount.value) + 1;
-});
-
-btnDecreaseProductAmount.addEventListener('click', (event) => {
-    if (inputProductAmount.value > 1) {
-        inputProductAmount.value = parseInt(inputProductAmount.value) - 1;
-    } else {
-        alert('La minima cantidad de productos que puedes tener en el carrito es de 1, no puedes disminuir mas');
-    }
-});
-
-inputProductAmount.addEventListener('input', (event) => {
-    if (isNaN(parseInt(inputProductAmount.value)) || inputProductAmount.value < 1) {
-        inputProductAmount.value = 1;
-    }
-});
-
-var dataProduct = {
-    product: [
-        {
-            id: 1,
-            name: 'Tennis Converse Standard',
-            description: 'Lorem Ipsum Dolot Asimmet',
-            price: 500.00,
-            size: ['1.5', '2', '2.5', '3', '3.5', '4']
-        },
-        {
-            id: 2,
-            name: 'Tennis Converse 2000',
-            description: 'Lorem Ipsum Dolot Asimmet',
-            price: 300.00,
-            size: ['1.5', '2', '2.5', '3', '3.5', '4'],
-        },
-    ],
-};
-
+import dataProduct from "./data/dataProduct";
 const product = document.getElementById('producto');
 const btnAddToCar = document.getElementById('agregar-al-carrito');
 const openCarBtn = document.querySelectorAll('[data-accion="abrir-carrito"]');
@@ -79,11 +17,11 @@ const colorThumbnails = {
     negro: './img/thumbs/negro.jpg',
     amarillo: './img/thumbs/amarillo.jpg',
     rojo: './img/thumbs/rojo.jpg'
-};
+}
 
 const getColorThumbnails = (colorThumbnail) => {
     return colorThumbnails[colorThumbnail]
-};
+}
 
 
 //
@@ -112,7 +50,7 @@ const renderShoppingCar = () => {
                     productPrice = productCar.productAmount * databaseProduct.price;
                     total += productPrice;
                 }
-            });
+            })
 
             //
             const selectedColorThumbnail = productCar.productColor;
@@ -144,7 +82,7 @@ const renderShoppingCar = () => {
                 </svg>
             </button>
             <p class="carrito__producto-precio">${formatCurrency.format(productPrice)}</p>
-        </div>`;
+        </div>`
 
             const itemCar = document.createElement('div');
 
@@ -160,7 +98,7 @@ const renderShoppingCar = () => {
 
 
 
-};
+}
 
 shoppingCarWindow.addEventListener('click', (event) => {
     if (event.target.closest('button').dataset.accion === 'eliminar-item-carrito') {
@@ -208,7 +146,7 @@ btnAddToCar.addEventListener('click', (event) => {
         shoppingCar.forEach((item) => {
             if (item.id === id && item.name === name && item.description === description && item.productColor === productColor && item.productSize === productSize) {
                 item.productAmount += productAmount;
-                productIntoCar = true;
+                productIntoCar = true
             }
         });
 
@@ -249,32 +187,3 @@ buyProductsIntoCar.addEventListener('click', (event) => {
     console.log('Sending information');
     console.log(shoppingCar);
 });
-
-class Tabs {
-    constructor(idContainerOptions) {
-        this.containerOptions = document.getElementById(idContainerOptions);
-        this.tabs = this.containerOptions.querySelector('.tabs');
-
-        this.tabs.addEventListener('click', (event) => {
-            //
-            if ([...event.target.classList].includes('tabs__button')) {
-                //
-                const tab = event.target.dataset.tab;
-
-                if (this.containerOptions.querySelector('.tab--active')) {
-                    this.containerOptions.querySelector('.tab--active').classList.remove('tab--active');
-                }
-
-                this.containerOptions.querySelector(`#${tab}`).classList.add('tab--active');
-
-                if (this.tabs.querySelector('.tabs__button--active')) {
-                    this.tabs.querySelector('.tabs__button--active').classList.remove('tabs__button--active');
-                }
-
-                event.target.classList.add('tabs__button--active');
-            }
-        });
-    }
-}
-
-new Tabs('mas-informacion');
